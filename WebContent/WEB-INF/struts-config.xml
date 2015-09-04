@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" 
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+ 
+<struts-config>
+ 
+	<form-beans>
+		 <form-bean name="loginForm" type="com.app.server.form.LoginForm"/>
+	</form-beans>
+ 
+ 	
+	<action-mappings>
+	   <action path="/login" type="com.app.server.ui.LoginAction" name="loginForm">
+		<forward name="success" path="/home.jsp"/>
+		<forward name="failure" path="/index.jsp"/>
+	   </action>
+	   <action path="/ear" type="com.app.server.ui.EARLoadAction" name="loginForm">
+	   </action>
+	   <action path="/war" type="com.app.server.ui.WarLoadAction" name="loginForm">
+	   </action>
+	   <action path="/rar" type="com.app.server.ui.RarLoadAction" name="loginForm">
+	   </action>
+	    <action path="/sar" type="com.app.server.ui.SarsLoadAction" name="loginForm">
+	   </action>
+	   <action path="/ezb" type="com.app.server.ui.EzbLoadAction" name="loginForm">
+	   </action>
+	    <action path="/jar" type="com.app.server.ui.JarLoadAction" name="loginForm">
+	   </action>
+	    <action path="/deploy" type="com.app.server.ui.DeployAction" name="loginForm">
+	   </action>
+	   <action path="/rmi" type="com.app.server.ui.RmiLoadAction" name="loginForm">
+	   </action>
+	   <action path="/dss" type="com.app.server.ui.DssLoadAction" name="loginForm">
+	   </action>
+	   <action path="/undeploy" type="com.app.server.ui.UndeployAction" name="loginForm">
+	   </action>
+	   <action path="/logout" type="com.app.server.ui.LogoutAction" name="loginForm">
+	       <forward name="success" path="/index.jsp"/>
+	   </action>
+	</action-mappings>
+ 
+</struts-config>
