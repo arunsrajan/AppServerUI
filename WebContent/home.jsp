@@ -22,6 +22,9 @@
 		.ui-resizable-e { cursor:e-resize;width:7px;right:-3px;top:0;height:100%;background:crimson; }
 		.ui-resizable-handle{position:absolute;font-size:0.1px;display:block;-ms-touch-action:none;touch-action:none}
 		tr > th:last-child >.ui-resizable-e { right: 0px; }
+		.mousechange:hover{
+			cursor:pointer;
+		}
 	</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -131,8 +134,6 @@
   </div>
 </div>
 </form>
-<div align="center"><input type="file" id="browse" name="file"/><input type="button" id="upload" value="Upload"></input>
-</div>
 </body>
   <script>
   var tabz;
@@ -147,6 +148,10 @@
         /*ui.jqXHR.success(function(data) {
             ui.panel.html(data);
           });*/
+      },
+      load: function( event, ui ) {
+    	  $(ui.panel.selector).find("script").each(function(i) {
+          });
       }
     });  
   $( "#themes" ).selectmenu({ change:function(){
@@ -158,46 +163,6 @@
   $("#jqueryui").attr({href : "themes/sunny/jquery-ui.css"});
   $("#theme").attr({href : "themes/sunny/themes.css"});
   //$("#browse").button();
-	$('#upload').button().click(function(event){
-			//$("#frmUploadArchive").get(0).setAttribute('action', 'upload.do');
-			//$("#frmUploadArchive").submit();
-			//alert('data');
-			var formData = new FormData();
-			formData.append('file', $('#browse')[0].files[0]);
-			event.preventDefault();
-			/*$.ajax({
-			    type: 'post',
-			    url: 'deploy.do' ,
-			    data: formData,
-			    contentType: false,
-			    encType: 'multipart/form-data',
-			    done: function () {
-			      alert('success')
-			    },
-			    processData: false
-			  });*/
-			  if(window.XMLHttpRequest){
-				xhr=new XMLHttpRequest();
-			  }
-			  else{
-				  xhr=new ActiveXObject("Microsoft.XMLHTTP");
-			  }
-			  	xhr.onreadystatechange=function(e){
-			  		if (xhr.readyState == 4 && xhr.status == 200) 
-			        {
-			  			 var selected = tabz.tabs("option", "active");
-			  			 tabz.tabs({ active: 0 });
-			  			 //$(tabz).slideUp( 4000 ).delay( 400 ).slideDown( 4000 );
-			  			 $(tabz).effect( "highlight", {	to: { width: 200, height: 0 }}, 500, function(){} );
-			  			 $(tabz).effect( "bounce", {to: { width: 200, height: 500 }}, 400, function(){});
-			  			 tabz.tabs({ active: selected });
-			        }
-			  	}
-			  	xhr.timeout = 60000;
-			  	//xhr.setRequestHeader("Content-Type", "multipart/form-data");
-			  	xhr.open('POST', "deploy.do", true);
-			  	xhr.send(formData);
-	});
 	$('#logout').button().click(function(event){
 			$("#frmUploadArchive").get(0).setAttribute('action', 'logout.do');
 			$("#frmUploadArchive").submit();
@@ -226,5 +191,46 @@
 		  	xhr.open('GET', "undeploy.do?filename="+filename, true);
 		  	xhr.send(null);
   }
+  function uploadclick(event){
+		//$("#frmUploadArchive").get(0).setAttribute('action', 'upload.do');
+		//$("#frmUploadArchive").submit();
+		//alert('data');
+		var formData = new FormData();
+		formData.append('file', $('#browse'+event.target.id)[0].files[0]);
+		event.preventDefault();
+		$("#"+event.target.id).unbind();
+		/*$.ajax({
+		    type: 'post',
+		    url: 'deploy.do' ,
+		    data: formData,
+		    contentType: false,
+		    encType: 'multipart/form-data',
+		    done: function () {
+		      alert('success')
+		    },
+		    processData: false
+		  });*/
+		  if(window.XMLHttpRequest){
+			xhr=new XMLHttpRequest();
+		  }
+		  else{
+			  xhr=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		  	xhr.onreadystatechange=function(e){
+		  		if (xhr.readyState == 4 && xhr.status == 200) 
+		        {
+		  			 var selected = tabz.tabs("option", "active");
+		  			 tabz.tabs({ active: 0 });
+		  			 //$(tabz).slideUp( 4000 ).delay( 400 ).slideDown( 4000 );
+		  			 $(tabz).effect( "highlight", {	to: { width: 200, height: 0 }}, 500, function(){} );
+		  			 $(tabz).effect( "bounce", {to: { width: 200, height: 500 }}, 400, function(){});
+		  			 tabz.tabs({ active: selected });
+		        }
+		  	}
+		  	xhr.timeout = 60000;
+		  	//xhr.setRequestHeader("Content-Type", "multipart/form-data");
+		  	xhr.open('POST', "deploy.do", true);
+		  	xhr.send(formData);
+}
   </script>
 </html>
