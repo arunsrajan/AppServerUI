@@ -1,5 +1,10 @@
 package com.app.server.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.management.MBeanServer;
+import javax.management.MBeanServerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +27,15 @@ public class LoginAction extends Action{
 				SessionObj sessionObj=new SessionObj();
 				sessionObj.setSessionId(request.getSession().getId());
 				request.getSession().setAttribute("SESSIONOBJ", sessionObj);
+				List<MBeanServer> mbs =  MBeanServerFactory.findMBeanServer(null);
+				MBeanServer singham=null;
+				List<String> singams=new ArrayList<String>();
+				for(MBeanServer singhamMBeanServer:mbs){				
+						if(singhamMBeanServer.getDefaultDomain().startsWith("singam")){
+							singams.add(singhamMBeanServer.getDefaultDomain());
+						}
+				}
+				request.getSession().setAttribute("singams", singams);
 				return mapping.findForward("success");
 			}
 			request.getSession().invalidate();

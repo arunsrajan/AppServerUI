@@ -17,7 +17,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.app.server.MultiPartFormInfo;
+import org.singam.web.multipart.MultiPartFormInfo;
 
 public class UndeployAction extends Action{
 	public ActionForward execute(ActionMapping mapping,ActionForm form,
@@ -25,9 +25,11 @@ public class UndeployAction extends Action{
 	        throws Exception {
 			ArrayList<MBeanServer> mbs =  MBeanServerFactory.findMBeanServer(null);
 			MBeanServer singham=null;
-			for(MBeanServer singhamMBeanServer:mbs){				
-					if(singhamMBeanServer.getDefaultDomain().equalsIgnoreCase("singham")){
+			String mbsname=request.getParameter("mbsname");
+			for(MBeanServer singhamMBeanServer:mbs){
+					if(singhamMBeanServer.getDefaultDomain().equalsIgnoreCase(mbsname)){
 						singham=singhamMBeanServer;
+						break;
 					}
 			}
 

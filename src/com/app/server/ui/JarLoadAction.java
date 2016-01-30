@@ -26,14 +26,16 @@ public class JarLoadAction extends Action{
 			LoginForm loginForm = (LoginForm)form;
 			ArrayList<MBeanServer> mbs =  MBeanServerFactory.findMBeanServer(null);
 			MBeanServer singham=null;
-			for(MBeanServer singhamMBeanServer:mbs){				
-					if(singhamMBeanServer.getDefaultDomain().equalsIgnoreCase("singham")){
+			String mbsname=request.getParameter("mbsname");
+			for(MBeanServer singhamMBeanServer:mbs){
+					if(singhamMBeanServer.getDefaultDomain().equalsIgnoreCase(mbsname)){
 						singham=singhamMBeanServer;
+						break;
 					}
 			}
 			HttpSession session= request.getSession();
 			session.setAttribute("filter", ".jar");
-			CopyOnWriteArrayList<String> jars=(CopyOnWriteArrayList<String>)singham.getAttribute(new ObjectName("com.app.server:type=deployer,service=EJBDeployer"), "JarsDeployed");
+			CopyOnWriteArrayList<String> jars=(CopyOnWriteArrayList<String>)singham.getAttribute(new ObjectName("org.singam.server:type=deployer,service=EJBDeployer"), "JarsDeployed");
 			StringBuffer buffer=new StringBuffer();
 			buffer.append("<div id='tablediv'><table id='table' align='center'><thead><tr><th>"
 					+ "delete</th><th>jars</th></tr></thead><tfoot>	<tr>		"

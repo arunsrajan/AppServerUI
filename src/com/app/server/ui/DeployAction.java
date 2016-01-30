@@ -18,8 +18,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.singam.web.multipart.MultiPartFormInfo;
 
-import com.app.server.MultiPartFormInfo;
 import com.app.server.form.LoginForm;
 
 public class DeployAction extends Action{
@@ -28,12 +28,13 @@ public class DeployAction extends Action{
 	        throws Exception {
 			ArrayList<MBeanServer> mbs =  MBeanServerFactory.findMBeanServer(null);
 			MBeanServer singham=null;
-			for(MBeanServer singhamMBeanServer:mbs){				
-					if(singhamMBeanServer.getDefaultDomain().equalsIgnoreCase("singham")){
+			String mbsname=request.getParameter("mbsname");
+			for(MBeanServer singhamMBeanServer:mbs){
+					if(singhamMBeanServer.getDefaultDomain().equalsIgnoreCase(mbsname)){
 						singham=singhamMBeanServer;
+						break;
 					}
 			}
-
 			ConcurrentHashMap param= (ConcurrentHashMap) request.getParameterMap();
 			MultiPartFormInfo formInfo=(MultiPartFormInfo) param.get("file");
 			System.out.println(param.get("file"));

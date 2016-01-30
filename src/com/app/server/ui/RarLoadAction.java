@@ -26,14 +26,16 @@ public class RarLoadAction extends Action{
 			LoginForm loginForm = (LoginForm)form;
 			ArrayList<MBeanServer> mbs =  MBeanServerFactory.findMBeanServer(null);
 			MBeanServer singham=null;
-			for(MBeanServer singhamMBeanServer:mbs){				
-					if(singhamMBeanServer.getDefaultDomain().equalsIgnoreCase("singham")){
+			String mbsname=request.getParameter("mbsname");
+			for(MBeanServer singhamMBeanServer:mbs){
+					if(singhamMBeanServer.getDefaultDomain().equalsIgnoreCase(mbsname)){
 						singham=singhamMBeanServer;
+						break;
 					}
 			}
 			HttpSession session= request.getSession();
 			session.setAttribute("filter", ".rar");
-			CopyOnWriteArrayList<String> rars=(CopyOnWriteArrayList<String>)singham.getAttribute(new ObjectName("com.app.server:type=deployer,service=RARDeployer"), "RarsDeployed");
+			CopyOnWriteArrayList<String> rars=(CopyOnWriteArrayList<String>)singham.getAttribute(new ObjectName("org.singam.server:type=deployer,service=RARDeployer"), "RarsDeployed");
 			StringBuffer buffer=new StringBuffer();
 			buffer.append("<div id='tablediv'><table id='table' align='center'><thead><tr><th>"
 					+ "delete</th><th>rars</th></tr></thead><tfoot>	<tr>		"
