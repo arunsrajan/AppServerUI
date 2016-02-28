@@ -260,7 +260,7 @@ tr>th:last-child>.ui-resizable-e {
 							$("#frmUploadArchive").submit();
 						});
 			});
-	function undeploy(filename) {
+	function undeploy(filename,mbsname) {
 		if (window.XMLHttpRequest) {
 			xhr = new XMLHttpRequest();
 		} else {
@@ -294,7 +294,7 @@ tr>th:last-child>.ui-resizable-e {
 		}
 		xhr.timeout = 60000;
 		//xhr.setRequestHeader("Content-Type", "multipart/form-data");
-		xhr.open('GET', "undeploy.do?filename=" + filename, true);
+		xhr.open('GET', "undeploy.do?filename=" + filename+"&mbsname="+mbsname, true);
 		xhr.send(null);
 	}
 	function uploadclick(event) {
@@ -303,6 +303,7 @@ tr>th:last-child>.ui-resizable-e {
 		//alert('data');
 		var formData = new FormData();
 		formData.append('file', $('#browse' + event.target.id)[0].files[0]);
+		formData.append('mbsname',$(this).attr("mbsname"));
 		event.preventDefault();
 		$("#" + event.target.id).unbind();
 		/*$.ajax({

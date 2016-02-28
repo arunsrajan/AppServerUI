@@ -36,17 +36,17 @@ public class WarLoadAction extends Action{
 			HttpSession session= request.getSession();
 			session.setAttribute("filter", ".war");
 			String uuid=UUID.randomUUID().toString();
-			CopyOnWriteArrayList<String> wars=(CopyOnWriteArrayList<String>)singham.getAttribute(new ObjectName("org.singam.server:type=deployer,service=WARDeployer"), "WarsDeployed");
+			CopyOnWriteArrayList<String> wars=(CopyOnWriteArrayList<String>)singham.getAttribute(new ObjectName("org.singam.server:type=deployer,service=WebDeployer"), "WarsDeployed");
 			StringBuffer buffer=new StringBuffer();
 			buffer.append("<div id='tablediv'><table id='table' align='center'><thead><tr><th>"
 					+ "delete</th><th>wars</th></tr></thead><tfoot>	<tr>		"
 					+ "<th>delete</th>		<th>wars</th></tfoot><tbody>");
 			for(String war:wars){
-				buffer.append("<tr><td align='center'><img src='delete.gif' class='mousechange' onclick='undeploy(\""+war+"\")'/></td>");
+				buffer.append("<tr><td align='center'><img src='delete.gif' class='mousechange' onclick='undeploy(\""+war+"\",\""+mbsname+"\")'/></td>");
 				buffer.append("<td align='center'>"+war+"</td></tr>");
 			}
 			buffer.append("</tbody></table></div>"
-					+ "<div align=\"center\"><input type=\"file\" id=\"browse"+uuid+"\" name=\"file\" accept=\""+session.getAttribute("filter")+"\"/><input type=\"button\" id=\""+uuid+"\" value=\"Upload\"></input></div>"
+					+ "<div align=\"center\"><input type=\"file\" id=\"browse"+uuid+"\" name=\"file\" accept=\""+session.getAttribute("filter")+"\"/><input type=\"button\" id=\""+uuid+"\" value=\"Upload\" mbsname='"+mbsname+"'></input></div>"
 					+ "<script type='text/javascript'>"
 					+ "$(\"button\").unbind();"
 					+ "$('#"+uuid+"').button().click(uploadclick);"

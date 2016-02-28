@@ -7,6 +7,7 @@
  
 	<form-beans>
 		 <form-bean name="loginForm" type="com.app.server.form.LoginForm"/>
+		  <form-bean name="fileUploadForm" type="com.app.server.form.FileUploadForm"/>
 	</form-beans>
  
  	
@@ -27,7 +28,7 @@
 	   </action>
 	    <action path="/jar" type="com.app.server.ui.JarLoadAction" name="loginForm">
 	   </action>
-	    <action path="/deploy" type="com.app.server.ui.DeployAction" name="loginForm">
+	    <action path="/deploy" type="com.app.server.ui.DeployAction" name="fileUploadForm">
 	   </action>
 	   <action path="/rmi" type="com.app.server.ui.RmiLoadAction" name="loginForm">
 	   </action>

@@ -35,7 +35,7 @@ public class UndeployAction extends Action{
 
 			String deploydir=(String)singham.getAttribute(new ObjectName("com.app.server:type=serverinfo"), "Deploydirectory");
 			URL packg=new URL(request.getParameter("filename"));
-			ObjectName deployerName=(ObjectName)singham.invoke(new ObjectName("com.app.server:type=service,service=DeploymentScanner"), "findDeployer", new Object[]{new File(packg.getFile())}, new String[]{File.class.getName()});
+			ObjectName deployerName=(ObjectName)singham.invoke(new ObjectName("org.singam.server:type=service,service=DeploymentScanner"), "findDeployer", new Object[]{new File(packg.getFile())}, new String[]{File.class.getName()});
 			singham.invoke(deployerName, "undeploy", new Object[]{packg}, new String[]{URL.class.getName()});
 			return mapping.findForward("success");
 		}
