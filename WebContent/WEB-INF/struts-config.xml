@@ -7,13 +7,14 @@
  
 	<form-beans>
 		 <form-bean name="loginForm" type="com.app.server.form.LoginForm"/>
-		  <form-bean name="fileUploadForm" type="com.app.server.form.FileUploadForm"/>
+		 <form-bean name="fileUploadForm" type="com.app.server.form.FileUploadForm"/>
+		 <form-bean name="navigationform" type="com.app.server.form.NavigationForm"/>
 	</form-beans>
  
  	
 	<action-mappings>
 	   <action path="/login" type="com.app.server.ui.LoginAction" name="loginForm">
-		<forward name="success" path=".singamdeploypanel"/>
+		<forward name="success" path=".singamhomepanel"/>
 		<forward name="failure" path="/index.jsp"/>
 	   </action>
 	   <action path="/ear" type="com.app.server.ui.EARLoadAction" name="loginForm">
@@ -38,6 +39,12 @@
 	   </action>
 	   <action path="/logout" type="com.app.server.ui.LogoutAction" name="loginForm">
 	       <forward name="success" path="/index.jsp"/>
+	   </action>
+	   <action path="/navigatemenu" type="com.app.server.ui.NavigationAction" name="navigationform">
+		<forward name="home" path=".singamhomepanel"/>
+		<forward name="deploypanel" path=".singamdeploypanel"/>
+		<forward name="serverstartpanel" path=".singamserverstartpanel"/>
+		<forward name="failure" path="/index.jsp"/>
 	   </action>
 	</action-mappings>
  	 <!-- Controller Configuration -->

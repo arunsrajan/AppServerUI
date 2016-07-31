@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Singam</title>
+<link href="skin-win8/ui.easytree.css" rel="stylesheet">
 <link id="theme" href="themes/humanity/theme.css" rel="stylesheet">
 <link id="jqueryui" href="themes/humanity/jquery-ui.css"
 	rel="stylesheet">
@@ -14,6 +15,7 @@
 <script src="jquery.ui.table.js"></script>
 <script src="ElementQueries.js"></script>
 <script src="ResizeSensor.js"></script>
+<script src="jquery.easytree.js"></script>
 <style type="text/css">
 body {
 	margin: 10px;
@@ -84,6 +86,13 @@ tr>th:last-child>.ui-resizable-e {
         <tr>
             <td height="20%" colspan="2">
             	<tiles:insert attribute="header" ignore="true" />
+            </td>
+        </tr>
+        <tr>
+        <td height="4%" colspan="2">
+            <%if(request.getAttribute("message")!=null){
+            	out.print(request.getAttribute("message"));
+            }%>	
             </td>
         </tr>
         <tr>

@@ -10,6 +10,12 @@
 	<put name="footer" value="/WEB-INF/layout/footer.jsp" />
    </definition>
 	<definition name=".singamdeploypanel" extends=".singambase">
+	<put name="body" value="/WEB-INF/layout/deploypanel.jsp" />
+   </definition>
+   <definition name=".singamhomepanel" extends=".singambase">
 	<put name="body" value="/WEB-INF/layout/home.jsp" />
-   </definition>	
+   </definition>
+    <definition name=".singamserverstartpanel" extends=".singambase">
+	<put name="body" value="/WEB-INF/layout/serverstartpanel.jsp" />
+   </definition>		
 </tiles-definitions>
