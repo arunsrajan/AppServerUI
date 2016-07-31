@@ -13,7 +13,7 @@
  	
 	<action-mappings>
 	   <action path="/login" type="com.app.server.ui.LoginAction" name="loginForm">
-		<forward name="success" path="/home.jsp"/>
+		<forward name="success" path=".singamdeploypanel"/>
 		<forward name="failure" path="/index.jsp"/>
 	   </action>
 	   <action path="/ear" type="com.app.server.ui.EARLoadAction" name="loginForm">
@@ -40,5 +40,14 @@
 	       <forward name="success" path="/index.jsp"/>
 	   </action>
 	</action-mappings>
+ 	 <!-- Controller Configuration -->
+		<controller
+		processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
+ 
+ 	<plug-in className="org.apache.struts.tiles.TilesPlugin" >
+		<set-property property="definitions-config"
+		value="/WEB-INF/tiles-defs.xml"/>
+	</plug-in>
+ 	
  
 </struts-config>

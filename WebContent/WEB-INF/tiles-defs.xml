@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+"http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+
+   <definition name=".singambase" path="/WEB-INF/layout/baselayout.jsp">
+	<put name="header" value="/WEB-INF/layout/header.jsp" />
+	<put name="menu" value="/WEB-INF/layout/menu.jsp" />
+	<put name="footer" value="/WEB-INF/layout/footer.jsp" />
+   </definition>
+	<definition name=".singamdeploypanel" extends=".singambase">
+	<put name="body" value="/WEB-INF/layout/home.jsp" />
+   </definition>	
+</tiles-definitions>
